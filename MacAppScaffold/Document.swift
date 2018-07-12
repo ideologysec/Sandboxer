@@ -15,7 +15,7 @@ class Document: NSDocument {
         // Add your subclass-specific initialization here.
     }
 
-    override class func autosavesInPlace() -> Bool {
+    override class var autosavesInPlace: Bool {
         return true
     }
 
@@ -28,7 +28,7 @@ class Document: NSDocument {
 
     override func data(ofType typeName: String) throws -> Data {
         if let theVC = self.windowControllers[0].contentViewController as? ViewController {
-            let fileContentToWrite = theVC.textScrollContent1.string!
+            let fileContentToWrite = theVC.textScrollContent1.string
             return fileContentToWrite.data(using: String.Encoding.utf8) ?? Data()
         }
         else {

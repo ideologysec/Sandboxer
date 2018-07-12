@@ -111,7 +111,7 @@ func doErrorAlertSheet(message: String, window: NSWindow) {
     let alert: NSAlert = NSAlert()
     alert.messageText = "An error occurred in your last action:"
     alert.informativeText = message
-    alert.alertStyle = NSAlertStyle.critical
+    alert.alertStyle = NSAlert.Style.critical
     alert.addButton(withTitle: "OK")
     alert.beginSheetModal(for: window, completionHandler: nil)
 }
@@ -120,7 +120,12 @@ func doErrorAlertModal(message: String) {
     let alert: NSAlert = NSAlert()
     alert.messageText = "An error occurred in your last action:"
     alert.informativeText = message
-    alert.alertStyle = NSAlertStyle.critical
+    alert.alertStyle = NSAlert.Style.critical
     alert.addButton(withTitle: "OK")
-    alert.runModal()
+    convertFromNSApplicationModalResponse(alert.runModal())
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSApplicationModalResponse(_ input: NSApplication.ModalResponse) -> Int {
+	return input.rawValue
 }
